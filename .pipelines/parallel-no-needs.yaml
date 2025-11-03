@@ -1,0 +1,23 @@
+pipeline:
+  name: parallel-no-needs
+
+stages:
+  - build
+
+echo1:
+  - stage: build
+  - image: alpine:3.20
+  - script:
+      - 'echo "job1 start"; sleep 2; echo "job1 done"'
+
+echo2:
+  - stage: build
+  - image: alpine:3.20
+  - script:
+      - 'echo "job2 start"; sleep 2; echo "job2 done"'
+
+echo3:
+  - stage: build
+  - image: alpine:3.20
+  - script:
+      - 'echo "job3 start"; sleep 2; echo "job3 done"'

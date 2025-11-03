@@ -1,0 +1,30 @@
+pipeline:
+  name: parallel-with-needs
+
+stages:
+  - build
+
+A:
+  stage: build
+  image: alpine:3.20
+  script:
+    - echo "[A] start $(date +%T)"
+    - sleep 4
+    - echo "[A] end   $(date +%T)"
+
+B:
+  stage: build
+  image: alpine:3.20
+  script:
+    - echo "[B] start $(date +%T)"
+    - sleep 4
+    - echo "[B] end   $(date +%T)"
+
+C:
+  stage: build
+  image: alpine:3.20
+  needs: [A, B]
+  script:
+    - echo "[C] start $(date +%T)"
+    - sleep 4
+    - echo "[C] end   $(date +%T)"
