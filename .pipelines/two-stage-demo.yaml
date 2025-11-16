@@ -1,0 +1,43 @@
+pipeline:
+  name: two-stage-demo
+  description: Two stages with per-stage DAG
+
+stages:
+  - build
+  - test
+
+# ---- build stage ----
+compile:
+  stage: build
+  image: alpine:3.20
+  script:
+    - echo "[compile] start $(date +%T)"
+    - sleep 2
+    - echo "[compile] end   $(date +%T)"
+
+pack:
+  stage: build
+  image: alpine:3.20
+  needs: [compile]
+  script:
+    - echo "[pack] start $(date +%T)"
+    - sleep 1
+    - echo "[pack] end   $(date +%T)"
+
+# ---- test stage ----
+lint:
+  stage: test
+  image: alpine:3.20
+  script:
+    - echo "[lint] start $(date +%T)"
+    - sleep 1
+    - echo "[lint] end   $(date +%T)"
+
+unit:
+  stage: test
+  image: alpine:3.20
+  needs: [lint]
+  script:
+    - echo "[unit] start $(date +%T)"
+    - sleep 2
+    - echo "[unit] end   $(date +%T)"
