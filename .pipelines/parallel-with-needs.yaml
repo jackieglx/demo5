@@ -9,7 +9,7 @@ A:
   image: alpine:3.20
   script:
     - echo "[A] start $(date +%T)"
-    - sleep 4
+    - sleep 1
     - echo "[A] end   $(date +%T)"
 
 B:
@@ -17,7 +17,7 @@ B:
   image: alpine:3.20
   script:
     - echo "[B] start $(date +%T)"
-    - sleep 4
+    - sleep 1
     - echo "[B] end   $(date +%T)"
 
 C:
@@ -26,5 +26,5 @@ C:
   needs: [A, B]
   script:
     - echo "[C] start $(date +%T)"
-    - sleep 4
+    - sleep 1
     - echo "[C] end   $(date +%T)"
